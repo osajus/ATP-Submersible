@@ -1,5 +1,3 @@
-#~/rov/venv/bin/python ~/rov/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-
 import os
 from fastapi import FastAPI, Response, status, HTTPException
 from fastapi.responses import FileResponse
@@ -18,3 +16,10 @@ def root():
 def get_status():
     raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
             detail="API okay")
+
+@app.post("/pull")
+def git_pull():
+    f = open('/home/pi/rov/GITPULLMASTER', 'w')
+    f.close()
+    raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
+            detail="done")
