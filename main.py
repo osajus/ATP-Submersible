@@ -10,7 +10,7 @@ app = FastAPI()
 
 @app.get("/", status_code=status.HTTP_200_OK)
 def root():
-    return {"status:": "API okay"}
+    return {"status:": "You shouldn't be seeing this."}
 
 @app.get("/rov")
 def get_status():
