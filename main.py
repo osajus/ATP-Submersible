@@ -17,7 +17,7 @@ def get_status():
     raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
             detail="API okay")
 
-@app.post("/pull")
+@app.post("/rov/pull")
 def git_pull():
     f = open('/home/pi/rov/GITPULLMASTER', 'w')
     f.close()
