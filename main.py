@@ -16,10 +16,6 @@ def root():
 def get_status():
     raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
             detail="API okay")
-@app.get("/test")
-def get_status():
-    raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
-            detail="test okay....")
 
 @app.post("/pull")
 def git_pull():
