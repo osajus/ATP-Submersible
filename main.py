@@ -19,7 +19,7 @@ def get_status():
 @app.get("/test")
 def get_status():
     raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
-            detail="test okay")
+            detail="test okay.")
 
 @app.post("/pull")
 def git_pull():
