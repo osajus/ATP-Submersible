@@ -18,8 +18,11 @@ def get_status():
             detail="API okay")
 
 @app.post("/rov/pull")
-def git_pull():
+def git_pull(payload: dict = Body(...)):
     f = open('/home/pi/rov/GITPULLMASTER', 'w')
+    f.close()
+    f = open('/home/pi/rov/foo.txt', 'w')
+    f.write(payload)
     f.close()
     raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
             detail="done")
