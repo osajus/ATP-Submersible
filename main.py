@@ -15,7 +15,7 @@ def root():
 @app.get("/rov")
 def get_status():
     raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
-            detail="API okay")
+            detail="API okay.")
 
 @app.post("/rov/pull")
 def git_pull():
