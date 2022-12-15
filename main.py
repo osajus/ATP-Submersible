@@ -4,7 +4,6 @@ from fastapi.responses import FileResponse
 from fastapi.params import Body
 from pydantic import BaseModel, Field
 
-
 # Configure FastAPI
 app = FastAPI()
 
@@ -14,8 +13,12 @@ def root():
 
 @app.get("/rov")
 def get_status():
-    raise HTTPException(status_code=status.HTTP_202_ACCEPTED, 
-            detail="API okay.")
+    tempf = os.system("/usr/bin/vcgencmd measure_temp | awk -F \"[=']\" '{print($2 * 1.8)+32}'")
+    tempf = (tempf * .001 * 1.8) + 32
+    uptime_min =  os.system("uptime ")
+    uptime_min = round((uptime_min / 60), 1)
+    testdict = {"Uptime minutes": uptime_min, "Temp 'f": tempf, "API Status": "Okay"}
+    return testdict
 
 @app.post("/rov/pull")
 def git_pull():
