@@ -2,3 +2,5 @@ fastapi[all]
 gunicorn
 uvloop
 websockets
+smbus2
+ctypes

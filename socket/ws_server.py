@@ -3,13 +3,15 @@ import asyncio
 import datetime
 import random
 import websockets
-from thermocouple import BMP180
+from sensors import BMP180
+from sensors import SSC
 
 
 
 
 
 tcouple = BMP180.BMP()
+press = SSC.SSC30()
 CONNECTIONS = set()
 
 async def register(websocket):
@@ -28,10 +30,15 @@ async def show_time():
 
 async def show_temp():
     while True:
-        message = str(tcouple.get_tempF())
+        message = str(
+            f"\nChamber Temp 'F: {tcouple.get_tempF()}"
+            f"\nSensor Temp 'F: {press.get_tempF()}"
+            f"\nPressure PSI: {press.get_pressPSI()}"
+            f"\nPressure FT: {press.get_pressFT()}"
+        )
         
         websockets.broadcast(CONNECTIONS, message)
-        await asyncio.sleep(random.random() * 2 + 1)
+        await asyncio.sleep(3)
 
 
 async def main():
