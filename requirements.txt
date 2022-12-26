@@ -1,6 +1,9 @@
 fastapi[all]
 gunicorn
 uvloop
+asyncio
 websockets
+sqlite3
 smbus2
 ctypes
+re
