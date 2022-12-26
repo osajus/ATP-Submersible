@@ -4,4 +4,4 @@ gitpull.log
 **/.env
 **/rov_local.db
 **/rov_server.db
-./test.py
+test.py
