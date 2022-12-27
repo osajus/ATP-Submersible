@@ -43,7 +43,7 @@ async def send_message():
         message = {
               "senddatetime": sendtime
             , "chamber_tempF": tcouple.get_tempF()
-            , "sensor_tempF": press.get_tempF()
+            , "water_tempF": press.get_tempF()
             , "pressure_psi": press.get_pressPSI()
             , "pressure_ft": press.get_pressFT()
         }

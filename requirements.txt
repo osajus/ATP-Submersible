@@ -6,4 +6,5 @@ websockets
 sqlite3
 smbus2
 ctypes
-re
+customtkinter
+matplotlib
