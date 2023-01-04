@@ -24,9 +24,9 @@ cur = con.cursor()
 #for row in cur.execute('SELECT * from data'):
 #    print(row)
 
-def insert_to_db(senddatetime, chamber_tempf, water_tempf, pressure_psi, pressure_ft):
+def insert_to_db(senddatetime, chamber_tempf, water_tempf, pressure_psi, pressure_ft, heading):
     try:
-        cur.execute(f"INSERT INTO data VALUES (NULL, \'{senddatetime}\', {chamber_tempf}, {water_tempf}, {pressure_psi}, {pressure_ft})")
+        cur.execute(f"INSERT INTO data VALUES (NULL, \'{senddatetime}\', {chamber_tempf}, {water_tempf}, {pressure_psi}, {pressure_ft}, {heading})")
         con.commit()
     except sqlite3.OperationalError:
         print("No such table <data> .... Creating it now")
@@ -40,7 +40,8 @@ def create_db():
         , chamber_tempF float
         , water_tempF float
         , pressure_psi float
-        , pressure_ft floatx);
+        , pressure_ft floatx
+        , heading int);
         """)
     con.commit()
 
@@ -63,4 +64,4 @@ if __name__ == "__main__":
         print(message)
 
         # Insert received data into local database
-        insert_to_db(message["senddatetime"], message["chamber_tempF"], message["water_tempF"], message["pressure_psi"], message["pressure_ft"])
+        insert_to_db(message["senddatetime"], message["chamber_tempF"], message["water_tempF"], message["pressure_psi"], message["pressure_ft"], message["heading"])

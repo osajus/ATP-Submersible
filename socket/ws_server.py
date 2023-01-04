@@ -5,6 +5,7 @@ import websockets
 import json
 from sensors import BMP180
 from sensors import SSC
+from sensors import LIS2MDL
 import socket
 
 # Amount of time between each broadcast.
@@ -17,8 +18,11 @@ print("Running on:", MY_IP)
 tcouple = BMP180.BMP()
 # Instantiate wet media sensor
 press = SSC.SSC30()
+# Instantiate magnetometer
+lis = LIS2MDL.LIS2MDL()
 # Set websocket 
 CONNECTIONS = set()
+
 
 async def register(websocket):
     # Keep track of all connections
@@ -46,6 +50,7 @@ async def send_message():
             , "water_tempF": press.get_tempF()
             , "pressure_psi": press.get_pressPSI()
             , "pressure_ft": press.get_pressFT()
+            , "heading": lis.get_heading()
         }
         # Serialize dictionary so it can be broacast
         message = json.dumps(message)

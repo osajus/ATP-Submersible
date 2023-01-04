@@ -66,17 +66,6 @@ class LIS2MDL:
         self.bus.write_byte_data(self._I2C_ADDRESS, CFG_REG_B, 0b00001000)
         # Let measurements stabilize
         time.sleep(0.1)
-    
-    def their_reset(self):
-        # This can probably be deleted soon
-        self.bus.write_byte_data(self._I2C_ADDRESS, CFG_REG_A, 0b00100000)
-        time.sleep(0.1)
-        self.bus.write_byte_data(self._I2C_ADDRESS, CFG_REG_A, 0b01000000)
-        time.sleep(0.1)
-        self.bus.write_byte_data(self._I2C_ADDRESS, CFG_REG_A, 0xF1)
-        self.bus.write_byte_data(self._I2C_ADDRESS, CFG_REG_B, 0x08)
-        self.bus.write_byte_data(self._I2C_ADDRESS, CFG_REG_C, 0x50)
-        self.bus.write_byte_data(self._I2C_ADDRESS, INT_CRTL_REG, 0xE7)
 
     def calibrate(self):
         self.hardiron_calibration = [[1000, -1000], [1000, -1000], [1000, -1000]]
@@ -112,7 +101,7 @@ class LIS2MDL:
         buf[0],  buf[1] = self.bus.read_i2c_block_data(self._I2C_ADDRESS, coordinate, 2)
         return struct.unpack_from('<h', buf, 0)[0] * 0.15
     
-    def normalize(self,magvals):
+    def normalize(self, magvals):
         ret = [0, 0, 0]
         for i, axis in enumerate(magvals):
             minv, maxv = self.hardiron_calibration[1]
@@ -127,21 +116,3 @@ class LIS2MDL:
         compass_heading += 180
         return compass_heading
 
-
-def main():
-    LIS = LIS2MDL()
-    #LIS.calibrate()
-    
-
-    print("Getting ready to run")
-    time.sleep(3)
-
-    i = 0
-    while i < 60:
-        time.sleep(.5)
-        i += 1
-        compass_heading = LIS.get_heading()
-        print("Heading:", compass_heading)
-
-if __name__ == "__main__":
-    main()

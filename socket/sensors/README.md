@@ -25,3 +25,13 @@
         - **Get temp in degrees C:** get_tempC()
         - **Get pressure in PSI:** get_pressPSI()
         - **Get pressure in Feet:** get_pressFT()
+
+- LIS2MDL
+    - <a href="http://shorturl.at/ryRS8" target="_new">Datasheet</a> and <a href="http://shorturl.at/CLNQX" target="_new">Magnetometer</a>
+    - An Adafruit LIS2MDL breakout magnetometer.
+    - Uses i2c.  Library based on circuitpython version with significant revision.
+    - LIS2MDL.py is written to return compass heading and has calibration mode.
+        - **Class Name:** LIS2MDL
+        - **Get Compass Heading:** get_heading()
+        - **Calibrate:** calibrate()
+        - **View Raw data** get_data()
